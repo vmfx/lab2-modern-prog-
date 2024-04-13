@@ -57,6 +57,11 @@ class TestFactorial(unittest.TestCase):
             self.assertEqual(main(), 1)
             self.assertIn("invalid literal for int()", fake_err.getvalue().strip())
 
+    @patch('sys.stdin', StringIO("5 6 7\n"))
+    def test_main_with_multiple_numbers(self):
+        with patch('sys.stderr', new=StringIO()) as fake_err:
+            self.assertEqual(main(), 1)
+            self.assertIn("invalid literal for int()", fake_err.getvalue().strip())
 
 if __name__ == "__main__":
     unittest.main()
